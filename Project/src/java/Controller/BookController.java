@@ -64,7 +64,7 @@ public class BookController extends HttpServlet{
                     listTodo(request, response);
                     break;
                 default:
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("login/login.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("View/login/login.jsp");
                     dispatcher.forward(request, response);
                     break;
             }
@@ -77,13 +77,13 @@ public class BookController extends HttpServlet{
             throws SQLException, IOException, ServletException {
         List<Book> listTodo = todoDAO.selectAllTodos();
         request.setAttribute("listTodo", listTodo);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("book/book-list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("View/book/book-list.jsp");
         dispatcher.forward(request, response);
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("book/book-form.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("View/book/book-form.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -91,7 +91,7 @@ public class BookController extends HttpServlet{
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Book existingTodo = todoDAO.selectTodo(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("book/book-form.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("View/book/book-form.jsp");
         request.setAttribute("todo", existingTodo);
         dispatcher.forward(request, response);
 
