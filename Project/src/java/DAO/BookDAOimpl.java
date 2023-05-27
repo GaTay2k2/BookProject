@@ -21,7 +21,7 @@ public class BookDAOimpl implements BookDAO{
     private static final String INSERT_TODOS_SQL = "INSERT INTO book"
 			+ "  (title, author, category, sold) VALUES " + " (?, ?, ?, ?);";
 
-	private static final String SELECT_TODO_BY_ID = "select id,title, author, category, sold from book where id =?;";
+	private static final String SELECT_TODO_BY_ID = "select * from book where id =?;";
 	private static final String SELECT_ALL_TODOS = "select * from book;";
 	private static final String DELETE_TODO_BY_ID = "delete from book where id = ?;";
 	private static final String UPDATE_TODO = "update book set title = ?, author= ?, category =?, sold =? where id = ?;";
@@ -38,7 +38,7 @@ public class BookDAOimpl implements BookDAO{
 			preparedStatement.setString(1, todo.getTitle());
 			preparedStatement.setString(2, todo.getAuthor());
 			preparedStatement.setString(3, todo.getCategory());
-			preparedStatement.setInt(5, todo.getSold());
+			preparedStatement.setInt(4, todo.getSold());
 			System.out.println(preparedStatement);
 			preparedStatement.executeUpdate();
 		} catch (SQLException exception) {
@@ -82,9 +82,9 @@ public class BookDAOimpl implements BookDAO{
 		// Step 1: Establishing a Connection
 		try (Connection connection = JDBCUtils.getConnection();
 
-				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_TODOS);) {
-			System.out.println(preparedStatement);
+			// Step 2:Create a statement using connection object
+			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_TODOS);) {
+			//System.out.println(preparedStatement);
 			// Step 3: Execute the query or update query
 			ResultSet rs = preparedStatement.executeQuery();
 

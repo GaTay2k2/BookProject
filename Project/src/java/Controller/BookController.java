@@ -28,11 +28,7 @@ import javax.servlet.http.HttpServlet;
 public class BookController extends HttpServlet{
 
     private static final long serialVersionUID = 1L;
-    private BookDAO todoDAO;
-
-    public void init() {
-        todoDAO = new BookDAOimpl();
-    }
+    private BookDAO todoDAO = new BookDAOimpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -41,6 +37,8 @@ public class BookController extends HttpServlet{
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        
         String action = request.getServletPath();
 
         try {
@@ -75,6 +73,7 @@ public class BookController extends HttpServlet{
 
     private void listTodo(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
+        response.setContentType("text/html;charset=UTF-8");
         List<Book> listTodo = todoDAO.selectAllTodos();
         request.setAttribute("listTodo", listTodo);
         RequestDispatcher dispatcher = request.getRequestDispatcher("View/book/book-list.jsp");
@@ -83,12 +82,14 @@ public class BookController extends HttpServlet{
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         RequestDispatcher dispatcher = request.getRequestDispatcher("View/book/book-form.jsp");
         dispatcher.forward(request, response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         int id = Integer.parseInt(request.getParameter("id"));
         Book existingTodo = todoDAO.selectTodo(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("View/book/book-form.jsp");
@@ -98,7 +99,7 @@ public class BookController extends HttpServlet{
     }
 
     private void insertTodo(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
         String title = request.getParameter("title");
         String author = request.getParameter("author");
         String category = request.getParameter("category");
@@ -109,8 +110,8 @@ public class BookController extends HttpServlet{
     }
 
     private void updateTodo(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         long id = Integer.parseInt(request.getParameter("id"));
-
         String title = request.getParameter("title");
         String author = request.getParameter("author");
         String category = request.getParameter("category");
@@ -123,6 +124,7 @@ public class BookController extends HttpServlet{
     }
 
     private void deleteTodo(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         int id = Integer.parseInt(request.getParameter("id"));
         todoDAO.deleteTodo(id);
         response.sendRedirect("list");

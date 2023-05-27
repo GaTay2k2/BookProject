@@ -9,6 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>User Management Application</title>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
@@ -23,13 +24,13 @@
         <nav class="navbar navbar-expand-md navbar-dark"
              style="background-color: tomato">
             <div>
-                <a href="https://www.javaguides.net" class="navbar-brand"> Todo
+                <a href="https://www.javaguides.net" class="navbar-brand"> Book
                     App</a>
             </div>
 
             <ul class="navbar-nav">
                 <li><a href="<%=request.getContextPath()%>/list"
-                       class="nav-link">Todos</a></li>
+                       class="nav-link">Books</a></li>
             </ul>
 
             <ul class="navbar-nav navbar-collapse justify-content-end">
@@ -46,15 +47,15 @@
                     </c:if>
                     <c:if test="${todo == null}">
                         <form action="insert" method="post">
-                        </c:if>
+                    </c:if>
 
                         <caption>
                             <h2>
                                 <c:if test="${todo != null}">
-                                    Edit Todo
+                                    Edit Book
                                 </c:if>
                                 <c:if test="${todo == null}">
-                                    Add New Todo
+                                    Add New Book
                                 </c:if>
                             </h2>
                         </caption>
@@ -76,12 +77,12 @@
                         </fieldset>
 
                         <fieldset class="form-group">
-                            <label>Book Author</label> <input type="text"
+                            <label>Book Category</label> <input type="text"
                                                               value="<c:out value='${todo.category}' />" class="form-control"
                                                               name="description" minlength="5">
                         </fieldset>
                         <fieldset class="form-group">
-                            <label>Book Author</label> <input type="text"
+                            <label>Book sold</label> <input type="text"
                                                               value="<c:out value='${todo.sold}' />" class="form-control"
                                                               name="description" minlength="5">
                         </fieldset>
